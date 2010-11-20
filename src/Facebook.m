@@ -19,7 +19,7 @@
 #import "FBRequest.h"
 
 static NSString* kOAuthURL = @"https://www.facebook.com/dialog/oauth";
-static NSString* kFBAppAuthURL = @"fbauth://authorize";
+//static NSString* kFBAppAuthURL = @"fbauth://authorize";
 static NSString* kRedirectURL = @"fbconnect://success";
 static NSString* kGraphBaseURL = @"https://graph.facebook.com/";
 static NSString* kRestApiURL = @"https://api.facebook.com/method/";
