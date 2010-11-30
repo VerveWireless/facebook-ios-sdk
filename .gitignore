@@ -6,6 +6,7 @@ sample/theRunAround/theRunAround.xcodeproj/*.pbxuser
 sample/theRunAround/theRunAround.xcodeproj/*.mode*
 src/facebook-ios-sdk.xcodeproj/*.pbxuser
 src/facebook-ios-sdk.xcodeproj/*.mode*
+src/facebook-ios-sdk.xcodeproj/*.perspectivev3
 src/build/
 test/UnitTest/UnitTest.xcodeproj/*.pbxuser
 test/UnitTest/UnitTest.xcodeproj/*.mode*
