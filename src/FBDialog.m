@@ -178,8 +178,22 @@ BOOL FBIsDeviceIPad() {
   CGFloat width = floor(scale_factor * frame.size.width) - kPadding * 2;
   CGFloat height = floor(scale_factor * frame.size.height) - kPadding * 2;
 
-  _orientation = [UIApplication sharedApplication].statusBarOrientation;
-  if (UIInterfaceOrientationIsLandscape(_orientation)) {
+  switch ([[UIApplication sharedApplication] statusBarOrientation]) {
+    case UIInterfaceOrientationPortrait:
+      _orientation = UIDeviceOrientationPortrait;
+      break;
+    case UIInterfaceOrientationPortraitUpsideDown:
+      _orientation = UIDeviceOrientationPortraitUpsideDown;
+      break;
+    case UIInterfaceOrientationLandscapeLeft:
+      _orientation = UIDeviceOrientationLandscapeLeft;
+      break;
+    case UIInterfaceOrientationLandscapeRight:
+      _orientation = UIDeviceOrientationLandscapeRight;
+      break;
+  }
+  
+  if (UIDeviceOrientationIsLandscape(_orientation)) {
     self.frame = CGRectMake(kPadding, kPadding, height, width);
   } else {
     self.frame = CGRectMake(kPadding, kPadding, width, height);
@@ -449,7 +463,27 @@ BOOL FBIsDeviceIPad() {
 // UIDeviceOrientationDidChangeNotification
 
 - (void)deviceOrientationDidChange:(void*)object {
-  UIDeviceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+  UIDeviceOrientation orientation = UIDeviceOrientationUnknown;
+  
+  switch ([[UIApplication sharedApplication] statusBarOrientation]) {
+    case UIInterfaceOrientationPortrait:
+      orientation = UIDeviceOrientationPortrait;
+      break;
+    case UIInterfaceOrientationPortraitUpsideDown:
+      orientation = UIDeviceOrientationPortraitUpsideDown;
+      break;
+    case UIInterfaceOrientationLandscapeLeft:
+      orientation = UIDeviceOrientationLandscapeLeft;
+      break;
+    case UIInterfaceOrientationLandscapeRight:
+      orientation = UIDeviceOrientationLandscapeRight;
+      break;
+  }
+  
+  if ((orientation == UIDeviceOrientationUnknown) || !(UIDeviceOrientationIsValidInterfaceOrientation(orientation))) {
+    return;
+  }
+  
   if (!_showingKeyboard && [self shouldRotateToOrientation:orientation]) {
     [self updateWebOrientation];
 
