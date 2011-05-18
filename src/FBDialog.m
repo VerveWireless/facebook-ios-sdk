@@ -425,7 +425,7 @@ BOOL FBIsDeviceIPad() {
         [self dialogDidCancel:url];
       }
     } else {
-      [self dialogDidSucceed:url];
+      [self dialogDidCancel:url];
     }
     return NO;
   } else if ([_loadingURL isEqual:url]) {
@@ -437,6 +437,13 @@ BOOL FBIsDeviceIPad() {
       }
     }
 
+    NSError *theError = NULL;
+    NSRegularExpression *theRegex = [NSRegularExpression regularExpressionWithPattern:@"^http://touch\\.facebook\\.com/l\\.php\\?u=fbconnect%3A%2F%2Fsuccess%2F%3Ferror_reason%3Duser_denied%26error%3Daccess_denied%26error_description%3DThe%2Buser%2Bdenied%2Byour%2Brequest\\.(&.*)?$" options:0 error:&theError];
+    if ([theRegex numberOfMatchesInString:[url absoluteString] options:0 range:(NSRange){ .length = [url absoluteString].length }] > 0)
+    {
+      [self dialogDidCancel:url];
+      return NO;
+    }
     [[UIApplication sharedApplication] openURL:request.URL];
     return NO;
   } else {
