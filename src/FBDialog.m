@@ -425,7 +425,7 @@ BOOL FBIsDeviceIPad() {
         [self dialogDidCancel:url];
       }
     } else {
-      [self dialogDidCancel:url];
+      [self dialogDidSucceed:url];
     }
     return NO;
   } else if ([_loadingURL isEqual:url]) {
